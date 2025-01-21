@@ -1,0 +1,22 @@
+<resources>
+    <!-- Nome do aplicativo -->
+    <string name="app_name">Travel Helper</string>
+
+    <string name="login_title">Faça login</string>
+    <string name="username_hint">Usuário</string>
+    <string name="password_hint">Senha</string>
+    <string name="login_button">Entrar</string>
+    <string name="login_error">Usuário ou senha incorretos!</string>
+    <string name="logout_success">Logout realizado com sucesso</string>
+
+    <string name="welcome_message">Bem-vindo, %1$s!</string>
+    <string name="logout">Logout</string>
+    <string name="word_list">Lista de Palavras</string>
+    <string name="view_map">Ver Mapa</string>
+    <string name="view_weather">Ver Clima</string>
+
+    <string name="loading">Carregando...</string>
+    <string name="error_message">Ocorreu um erro, tente novamente.</string>
+    <string name="location_error">Não foi possível obter a localização.</string>
+</resources>
+
