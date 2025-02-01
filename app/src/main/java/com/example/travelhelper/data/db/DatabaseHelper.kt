@@ -4,12 +4,13 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import com.example.travelhelper.data.models.PalavrasEIdiomas
 
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
         private const val DATABASE_NAME = "language_helper.db"
-        private const val DATABASE_VERSION = 2 // Aumentei a versão para forçar a recriação
+        private const val DATABASE_VERSION = 2
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -18,10 +19,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             """
             CREATE TABLE palavras_e_idiomas (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                pt TEXT NOT NULL,
-                en TEXT NOT NULL,
-                es TEXT NOT NULL,
-                fr TEXT NOT NULL
+                pt TEXT NOT NULL COLLATE NOCASE,
+                en TEXT NOT NULL COLLATE NOCASE,
+                es TEXT NOT NULL COLLATE NOCASE,
+                fr TEXT NOT NULL COLLATE NOCASE
             )
             """
         )

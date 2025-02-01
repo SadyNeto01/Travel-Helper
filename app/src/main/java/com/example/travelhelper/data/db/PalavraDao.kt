@@ -15,11 +15,11 @@ class PalavraDao(private val dbHelper: DatabaseHelper) {
         }
 
         val columns = if (colunaIdioma != null) {
-            arrayOf("id", "pt", colunaIdioma)
+            arrayOf("pt", colunaIdioma)
         } else {
-            arrayOf("id", "pt", "en")
+            arrayOf("pt", "en")
         }
-        val cursor: Cursor = db.query(
+        val cursor = db.query(
             "palavras_e_idiomas",
             columns,
             null,
@@ -33,7 +33,6 @@ class PalavraDao(private val dbHelper: DatabaseHelper) {
 
         cursor.use {
             while (it.moveToNext()) {
-                val id = it.getInt(it.getColumnIndexOrThrow("id"))
                 val palavraPt = it.getString(it.getColumnIndexOrThrow("pt"))
                 val palavraTraduzida = if (colunaIdioma != null) {
                     it.getString(it.getColumnIndexOrThrow(colunaIdioma))
@@ -41,7 +40,28 @@ class PalavraDao(private val dbHelper: DatabaseHelper) {
                     it.getString(it.getColumnIndexOrThrow("en"))
                 }
 
-                listaPalavras.add(PalavrasEIdiomas(id, palavraPt, palavraTraduzida, "", ""))
+                listaPalavras.add(PalavrasEIdiomas(0, palavraPt, palavraTraduzida, "", ""))
+            }
+        }
+        return listaPalavras
+    }
+
+    fun buscarPalavraNoIdioma(termo: String, idiomaDoTelefone: String): List<PalavrasEIdiomas> {
+        val db = dbHelper.readableDatabase
+        val colunasValidas = listOf("pt", "en", "es", "fr")
+        val colunaIdioma = if (colunasValidas.contains(idiomaDoTelefone)) idiomaDoTelefone else "en"
+
+        val cursor = db.rawQuery(
+            "SELECT pt, $colunaIdioma FROM palavras_e_idiomas WHERE LOWER(pt) LIKE LOWER(?) OR LOWER($colunaIdioma) LIKE LOWER(?)",
+            arrayOf("%$termo%", "%$termo%")
+        )
+
+        val listaPalavras = mutableListOf<PalavrasEIdiomas>()
+        cursor.use {
+            while (it.moveToNext()) {
+                val palavraPt = it.getString(it.getColumnIndexOrThrow("pt"))
+                val palavraTraduzida = it.getString(it.getColumnIndexOrThrow(colunaIdioma))
+                listaPalavras.add(PalavrasEIdiomas(0, palavraPt, palavraTraduzida, "", ""))
             }
         }
         return listaPalavras

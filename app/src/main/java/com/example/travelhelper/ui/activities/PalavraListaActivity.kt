@@ -1,6 +1,9 @@
 package com.example.travelhelper.ui.activities
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,12 +15,12 @@ import com.example.travelhelper.data.repositories.PalavraRepository
 import com.example.travelhelper.ui.adapters.PalavraAdapter
 import com.example.travelhelper.ui.viewmodels.MainViewModel
 import com.example.travelhelper.ui.viewmodels.MainViewModelFactory
-import java.util.Locale
 
 class PalavraListaActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var palavraAdapter: PalavraAdapter
+    private lateinit var etSearch: EditText
     private val viewModel: MainViewModel by viewModels {
         val databaseHelper = DatabaseHelper(this)
         val palavraDao = PalavraDao(databaseHelper)
@@ -34,7 +37,14 @@ class PalavraListaActivity : AppCompatActivity() {
         palavraAdapter = PalavraAdapter(emptyList())
         recyclerView.adapter = palavraAdapter
 
-        viewModel.carregarPalavras()
+        etSearch = findViewById(R.id.et_search)
+        etSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.buscarPalavra(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
 
         viewModel.palavras.observe(this) { palavras ->
             palavraAdapter.updateList(palavras)

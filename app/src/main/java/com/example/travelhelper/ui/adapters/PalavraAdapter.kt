@@ -25,7 +25,7 @@ class PalavraAdapter(
     override fun onBindViewHolder(holder: PalavraViewHolder, position: Int) {
         val palavra = palavras[position]
         holder.palavraBase.text = palavra.pt
-        holder.traducao.text = palavra.en // Pode ser ajustado dinamicamente caso precise de outro idioma
+        holder.traducao.text = palavra.en
     }
 
     override fun getItemCount(): Int = palavras.size
