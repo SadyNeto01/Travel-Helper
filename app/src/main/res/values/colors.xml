@@ -13,5 +13,7 @@
 >
     <color name="colorError">#B00020</color>
     <color name="colorSuccess">#4CAF50</color>
+    <color name="colorPalavraBase">#212121</color>
+    <color name="colorTraducao">#757575</color>
 </resources>
 

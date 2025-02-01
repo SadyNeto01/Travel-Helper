@@ -18,5 +18,7 @@
     <string name="loading">Carregando...</string>
     <string name="error_message">Ocorreu um erro, tente novamente.</string>
     <string name="location_error">Não foi possível obter a localização.</string>
+    <string name="palavra_base">Palavra Base</string>
+    <string name="traducao">Tradução</string>
 </resources>
 

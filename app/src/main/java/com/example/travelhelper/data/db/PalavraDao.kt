@@ -1,45 +1,49 @@
 package com.example.travelhelper.data.db
 
-import android.content.ContentValues
 import android.database.Cursor
-import com.example.travelhelper.data.models.Palavra
+import com.example.travelhelper.data.models.PalavrasEIdiomas
 
 class PalavraDao(private val dbHelper: DatabaseHelper) {
-
-    fun inserirPalavra(palavraBase: String): Long {
-        val db = dbHelper.writableDatabase
-        val values = ContentValues().apply {
-            put("palavra_base", palavraBase)
-        }
-        return db.insert("palavras", null, values)
-    }
-
-    fun atualizarPalavra(id: Int, palavraBase: String): Int {
-        val db = dbHelper.writableDatabase
-        val values = ContentValues().apply {
-            put("palavra_base", palavraBase)
-        }
-        return db.update("palavras", values, "id=?", arrayOf(id.toString()))
-    }
-
-    fun deletarPalavra(id: Int): Int {
-        val db = dbHelper.writableDatabase
-        return db.delete("palavras", "id=?", arrayOf(id.toString()))
-    }
-
-    fun obterPalavras(): List<Palavra> {
+    fun obterPalavras(idiomaDoTelefone: String): List<PalavrasEIdiomas> {
         val db = dbHelper.readableDatabase
-        val cursor: Cursor = db.query("palavras", arrayOf("id", "palavra_base"), null, null, null, null, null)
-        val palavras = mutableListOf<Palavra>()
+        val colunasDisponiveis = listOf("pt", "en", "es", "fr")
 
-        while (cursor.moveToNext()) {
-            val palavra = Palavra(
-                id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
-                palavraBase = cursor.getString(cursor.getColumnIndexOrThrow("palavra_base"))
-            )
-            palavras.add(palavra)
+        val colunaIdioma = if (colunasDisponiveis.contains(idiomaDoTelefone)) {
+            idiomaDoTelefone
+        } else {
+            null
         }
-        cursor.close()
-        return palavras
+
+        val columns = if (colunaIdioma != null) {
+            arrayOf("id", "pt", colunaIdioma)
+        } else {
+            arrayOf("id", "pt", "en")
+        }
+        val cursor: Cursor = db.query(
+            "palavras_e_idiomas",
+            columns,
+            null,
+            null,
+            null,
+            null,
+            null
+        )
+
+        val listaPalavras = mutableListOf<PalavrasEIdiomas>()
+
+        cursor.use {
+            while (it.moveToNext()) {
+                val id = it.getInt(it.getColumnIndexOrThrow("id"))
+                val palavraPt = it.getString(it.getColumnIndexOrThrow("pt"))
+                val palavraTraduzida = if (colunaIdioma != null) {
+                    it.getString(it.getColumnIndexOrThrow(colunaIdioma))
+                } else {
+                    it.getString(it.getColumnIndexOrThrow("en"))
+                }
+
+                listaPalavras.add(PalavrasEIdiomas(id, palavraPt, palavraTraduzida, "", ""))
+            }
+        }
+        return listaPalavras
     }
 }
