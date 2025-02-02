@@ -15,6 +15,7 @@ import com.example.travelhelper.data.repositories.PalavraRepository
 import com.example.travelhelper.ui.adapters.PalavraAdapter
 import com.example.travelhelper.ui.viewmodels.MainViewModel
 import com.example.travelhelper.ui.viewmodels.MainViewModelFactory
+import java.util.Locale
 
 class PalavraListaActivity : AppCompatActivity() {
 
@@ -45,7 +46,15 @@ class PalavraListaActivity : AppCompatActivity() {
             }
             override fun afterTextChanged(s: Editable?) {}
         })
+    }
 
+    override fun onResume() {
+        super.onResume()
+        atualizarLista()
+    }
+
+    private fun atualizarLista() {
+        viewModel.carregarPalavras()
         viewModel.palavras.observe(this) { palavras ->
             palavraAdapter.updateList(palavras)
         }
