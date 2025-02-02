@@ -9,11 +9,20 @@
         <item name="android:textColor">@color/colorTextPrimary</item>
     </style>
 
+    <style name="Theme.TravelHelper.NoActionBar" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+    </style>
 
-    <style name="ButtonStyle" parent="Widget.MaterialComponents.Button">
-        <item name="android:backgroundTint">@color/colorButtonNormal</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:padding">@dimen/padding_medium</item>
+    <style name="ButtonGridStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#FFFFFF</item>
     </style>
 
     <style name="TextViewTitle" parent="TextAppearance.MaterialComponents.Headline5">

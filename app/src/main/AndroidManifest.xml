@@ -15,11 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TravelHelper"
         tools:targetApi="31">
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB9dNpxlzZNhjE84CXNmIDpG02WSj9fHpI" />
-
+            android:value="GOOGLE_MAPS_API_KEY" />
         <activity
             android:name=".ui.activities.LoginActivity"
             android:exported="true"
@@ -30,10 +28,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.MainActivity" />
-        <activity android:name=".ui.activities.PalavraListaActivity" />
-        <activity android:name=".ui.activities.MapaActivity" />
-        <activity android:name=".ui.activities.ClimaActivity" />
+
+        <activity
+            android:name=".ui.activities.MainActivity"
+            android:theme="@style/Theme.TravelHelper"/>
+
+        <activity
+            android:name=".ui.activities.PalavraListaActivity"
+            android:theme="@style/Theme.TravelHelper.NoActionBar"/>
+
+        <activity
+            android:name=".ui.activities.MapaActivity"
+            android:theme="@style/Theme.TravelHelper.NoActionBar"/>
+
+        <activity
+            android:name=".ui.activities.ClimaActivity"
+            android:theme="@style/Theme.TravelHelper.NoActionBar"/>
+
+        <activity
+            android:name=".ui.activities.SobreActivity"
+            android:theme="@style/Theme.TravelHelper.NoActionBar"/>
+
     </application>
 
 </manifest>

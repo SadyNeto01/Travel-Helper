@@ -1,5 +1,4 @@
 <resources>
-    <!-- Nome do aplicativo -->
     <string name="app_name">Travel Helper</string>
 
     <string name="login_title">Faça login</string>
@@ -11,14 +10,21 @@
 
     <string name="welcome_message">Bem-vindo, %1$s!</string>
     <string name="logout">Logout</string>
-    <string name="word_list">Lista de Palavras</string>
-    <string name="view_map">Ver Mapa</string>
-    <string name="view_weather">Ver Clima</string>
+    <string name="word_list">Dicionário</string>
+    <string name="load_map">Mapa</string>
+    <string name="view_weather">Clima</string>
 
     <string name="loading">Carregando...</string>
     <string name="error_message">Ocorreu um erro, tente novamente.</string>
     <string name="location_error">Não foi possível obter a localização.</string>
     <string name="palavra_base">Palavra Base</string>
     <string name="traducao">Tradução</string>
+    <string name="sobre">Sobre</string>
+    <string name="sobre_titulo">Sobre o Aplicativo</string>
+    <string name="sobre_curso">📚 Nome do Curso: Engenharia Informática\n📖 Disciplina: Desenvolvimento de Aplicações Móveis\n📅 Ano Letivo: 2024/2025</string>
+    <string name="sobre_autores">👥 Autores:\n1. Sady Neto\n2. Nermin Kılıçarslan</string>
+    <string name="sobre_tecnologias">🛠️ Tecnologias Utilizadas:\n• Android SDK\n• Kotlin\n• Google Maps API\n• OpenWeather API</string>
+    <string name="sobre_codigo_terceiros">📄 Código de Terceiros:\n• Google Maps API: Obtido do Google Developers\n• Open Weather API: Obtido do site da Open Weather.</string>
+
 </resources>
 
